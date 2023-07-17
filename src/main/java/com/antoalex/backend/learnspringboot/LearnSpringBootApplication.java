@@ -23,13 +23,13 @@ public class LearnSpringBootApplication {
 	CommandLineRunner commandLineRunner(ContentRepository repository){
 		return args -> {
 			Content content = new Content(null, 
-			"The New World",
-			"All about the coming times",
-			Status.IDEA,
-			Type.VIDEO,
-			LocalDateTime.now(),
-			null,
-			"");
+			 "Strongest of the Strongest",
+			 "One piece OST's", 
+			 Status.IDEA, 
+			 Type.VIDEO, 
+			 LocalDateTime.now(), 
+			 null, 
+			 "http://localhost:8080/api/content");
 
 			repository.save(content);
 		};

@@ -26,35 +26,35 @@ public class ContentJdbcTemplateRepository {
         res.getString("title"),
         res.getString("desc"),
         Status.valueOf(res.getString("status")),
-        Type.valueOf(res.getString("content-type")),
-        res.getObject("date-created", LocalDateTime.class),
-        res.getObject("date-updated", LocalDateTime.class),
+        Type.valueOf(res.getString("type")),
+        res.getObject("date_created", LocalDateTime.class),
+        res.getObject("date_updated", LocalDateTime.class),
         res.getString("url"));
     }
 
-    public List<Content> getAllContent(){
-        String sql = "SELECT * FROM Content";
+    public List<Content> getAllContent() throws SQLException{
+        String sql = "SELECT * FROM Content;";
         List<Content> contents = jdbcTemplate.query(sql, ContentJdbcTemplateRepository::mapRow);
         return contents;
     }
 
-    public void createContent(String title, String desc, Status status, Type contentType, String URL) {
-        String sql = "INSERT INTO Content (title, desc, status, content_type, date_created, URL) VALUES (?, ?, ?, ?, NOW(), ?)";
+    public void createContent(String title, String desc, Status status, Type contentType, String URL) throws SQLException{
+        String sql = "INSERT INTO Content (title, desc, status, type, date_created, url) VALUES (?, ?, ?, ?, NOW(), ?);";
         jdbcTemplate.update(sql, title, desc, status, contentType, URL);
     }
 
-    public void updateContent(int id, String title, String desc, Status status, Type contentType, String URL) {
-        String sql = "UPDATE Content SET title=?, desc=?, status=?, content_type=?, date_updated=NOW(), url=? WHERE id=?";
+    public void updateContent(int id, String title, String desc, Status status, Type contentType, String URL){
+        String sql = "UPDATE Content SET title=?, desc=?, status=?, type=?, date_updated=NOW(), url=? WHERE id=?;";
         jdbcTemplate.update(sql, title, desc, status, contentType, URL, id);
     }
 
-    public void deleteContent(int id) {
-        String sql = "DELETE FROM Content WHERE id=?";
+    public void deleteContent(int id) throws SQLException{
+        String sql = "DELETE FROM Content WHERE id=?;";
         jdbcTemplate.update(sql, id);
     }
 
-    public Content getContent(int id) {
-        String sql = "SELECT * FROM Content WHERE id=?";
+    public Content getContent(int id) throws SQLException{
+        String sql = "SELECT * FROM Content WHERE id=?;";
         Content content = jdbcTemplate.queryForObject(sql, ContentJdbcTemplateRepository::mapRow, new Object[]{id});
         return content;
     }

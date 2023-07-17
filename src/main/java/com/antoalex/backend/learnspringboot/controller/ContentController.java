@@ -3,7 +3,6 @@ package com.antoalex.backend.learnspringboot.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +19,6 @@ import com.antoalex.backend.learnspringboot.repository.ContentRepository;
 
 @RestController
 @RequestMapping("/api/content")
-@CrossOrigin
 public class ContentController {
     
     private ContentRepository repository;
@@ -59,6 +57,12 @@ public class ContentController {
     public void delete(@PathVariable Integer id){
         repository.deleteById(id);
     }
+
+    // @GetMapping("/filter/{keyword}")
+    // public List<Content> findByTitle(@PathVariable String keyword){
+        
+    // }
+    
 
     
 }
