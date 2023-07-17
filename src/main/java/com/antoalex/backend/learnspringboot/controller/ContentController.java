@@ -3,6 +3,7 @@ package com.antoalex.backend.learnspringboot.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,15 +16,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.antoalex.backend.learnspringboot.model.Content;
-import com.antoalex.backend.learnspringboot.repository.ContentCollectionRepository;
+import com.antoalex.backend.learnspringboot.repository.ContentRepository;
 
 @RestController
 @RequestMapping("/api/content")
+@CrossOrigin
 public class ContentController {
     
-    private ContentCollectionRepository repository;
+    private ContentRepository repository;
 
-    public ContentController(ContentCollectionRepository repository){
+    public ContentController(ContentRepository repository){
         this.repository = repository; 
     }
 
@@ -55,7 +57,7 @@ public class ContentController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void delete(@PathVariable Integer id){
-        repository.delete(id);
+        repository.deleteById(id);
     }
 
     
