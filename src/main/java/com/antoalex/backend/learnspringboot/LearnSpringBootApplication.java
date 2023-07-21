@@ -5,13 +5,16 @@ import java.time.LocalDateTime;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 
+import com.antoalex.backend.learnspringboot.config.ContentCalendarProperties;
 import com.antoalex.backend.learnspringboot.model.Content;
 import com.antoalex.backend.learnspringboot.model.Status;
 import com.antoalex.backend.learnspringboot.model.Type;
 import com.antoalex.backend.learnspringboot.repository.ContentRepository;
 
+@EnableConfigurationProperties(ContentCalendarProperties.class)
 @SpringBootApplication
 public class LearnSpringBootApplication {
 

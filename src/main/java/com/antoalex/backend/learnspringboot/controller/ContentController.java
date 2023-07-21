@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
 import com.antoalex.backend.learnspringboot.model.Content;
+import com.antoalex.backend.learnspringboot.model.Status;
 import com.antoalex.backend.learnspringboot.repository.ContentRepository;
 
 @RestController
@@ -58,11 +59,15 @@ public class ContentController {
         repository.deleteById(id);
     }
 
-    // @GetMapping("/filter/{keyword}")
-    // public List<Content> findByTitle(@PathVariable String keyword){
-        
-    // }
+    @GetMapping("/filter/{keyword}")
+    public List<Content> findByTitle(@PathVariable String keyword){
+        return repository.findAllByTitleContains(keyword);
+    }
     
+    @GetMapping("/filter/status/{status}")
+    public List<Content> findByStatus(@PathVariable Status status){
+        return repository.listByStatus(status);
+    }
 
     
 }
